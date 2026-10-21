@@ -1,0 +1,23 @@
+{
+  "name": "Document",
+  "type": "object",
+  "properties": {
+    "company_id": { "type": "string" },
+    "load_id": { "type": "string" },
+    "doc_type": {
+      "type": "string",
+      "enum": ["rate_confirmation", "bol", "pod", "lumper_receipt", "scale_ticket", "detention_evidence", "invoice", "other"],
+      "default": "other"
+    },
+    "file_name": { "type": "string" },
+    "mime_type": { "type": "string" },
+    "size": { "type": "number" },
+    "storage_key": { "type": "string" },
+    "entered_load_number": { "type": "string" },
+    "entered_weight": { "type": "number" },
+    "signature_confirmed": { "type": "boolean", "default": false },
+    "approved": { "type": "boolean", "default": false },
+    "notes": { "type": "string" }
+  },
+  "required": ["company_id", "load_id"]
+}

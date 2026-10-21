@@ -1,0 +1,72 @@
+{
+  "name": "LoadException",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "load_id": {
+      "type": "string"
+    },
+    "load_number": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Review",
+        "Info"
+      ]
+    },
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "broker_question": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "acknowledged",
+        "resolved",
+        "reopened"
+      ],
+      "default": "open"
+    },
+    "assigned_to": {
+      "type": "string"
+    },
+    "resolution_notes": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "system",
+        "user",
+        "driver"
+      ],
+      "default": "system"
+    }
+  },
+  "required": [
+    "company_id",
+    "load_id",
+    "key"
+  ]
+}

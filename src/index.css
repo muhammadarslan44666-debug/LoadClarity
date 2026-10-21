@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 22% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 22% 11%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 28 30% 10%;
+    --secondary: 40 20% 96%;
+    --secondary-foreground: 222 22% 11%;
+    --muted: 40 14% 96%;
+    --muted-foreground: 222 10% 42%;
+    --accent: 40 20% 94%;
+    --accent-foreground: 222 22% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 60% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 95% 45%;
+    --warning-foreground: 28 30% 10%;
+    --info: 210 80% 48%;
+    --info-foreground: 0 0% 100%;
+    --border: 40 14% 90%;
+    --input: 40 14% 90%;
+    --ring: 38 92% 50%;
+    --chart-1: 38 92% 50%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 0 72% 51%;
+    --radius: 0.625rem;
+    --font-heading: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 22% 11%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 28 30% 10%;
+    --sidebar-accent: 40 20% 94%;
+    --sidebar-accent-foreground: 222 22% 11%;
+    --sidebar-border: 40 14% 90%;
+    --sidebar-ring: 38 92% 50%;
+  }
+
+  .dark {
+    --background: 222 22% 8%;
+    --foreground: 40 14% 96%;
+    --card: 222 18% 11%;
+    --card-foreground: 40 14% 96%;
+    --popover: 222 18% 11%;
+    --popover-foreground: 40 14% 96%;
+    --primary: 38 95% 55%;
+    --primary-foreground: 28 30% 10%;
+    --secondary: 222 14% 18%;
+    --secondary-foreground: 40 14% 96%;
+    --muted: 222 14% 16%;
+    --muted-foreground: 40 8% 65%;
+    --accent: 222 14% 18%;
+    --accent-foreground: 40 14% 96%;
+    --destructive: 0 62% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 55% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 90% 55%;
+    --warning-foreground: 28 30% 10%;
+    --info: 210 70% 58%;
+    --info-foreground: 0 0% 100%;
+    --border: 222 14% 20%;
+    --input: 222 14% 20%;
+    --ring: 38 95% 55%;
+    --sidebar-background: 222 22% 10%;
+    --sidebar-foreground: 40 14% 96%;
+    --sidebar-primary: 38 95% 55%;
+    --sidebar-primary-foreground: 28 30% 10%;
+    --sidebar-accent: 222 14% 16%;
+    --sidebar-accent-foreground: 40 14% 96%;
+    --sidebar-border: 222 14% 18%;
+    --sidebar-ring: 38 95% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading tracking-wide;
+  }
+}
+/* Compact Leaflet map styles for the Load Details route panel. */
+.load-route-map { height: 250px; width: 100%; z-index: 0; background: hsl(var(--muted)); }
+.route-map-marker { background: transparent; border: 0; }
+.route-map-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border: 3px solid white; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); color: white; font-size: 11px; font-weight: 700; box-shadow: 0 2px 8px rgb(0 0 0 / 25%); }
+.route-map-pin::first-letter { transform: rotate(45deg); }
+.route-map-pin-pickup { background: #10b981; }
+.route-map-pin-delivery { background: #f97316; }
+.route-map-legend-dot { display: inline-block; width: 7px; height: 7px; border-radius: 9999px; }

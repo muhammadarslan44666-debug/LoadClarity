@@ -1,0 +1,93 @@
+{
+  "name": "Company",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "plan": {
+      "type": "string",
+      "enum": [
+        "free",
+        "solo",
+        "pro",
+        "team"
+      ],
+      "default": "free"
+    },
+    "fuel_price": {
+      "type": "number",
+      "default": 3.85
+    },
+    "mpg": {
+      "type": "number",
+      "default": 7.5
+    },
+    "driver_pay_mode": {
+      "type": "string",
+      "enum": [
+        "per_mile",
+        "percent"
+      ],
+      "default": "per_mile"
+    },
+    "driver_pay_per_mile": {
+      "type": "number",
+      "default": 0.65
+    },
+    "driver_pay_percent": {
+      "type": "number",
+      "default": 0
+    },
+    "maintenance_per_mile": {
+      "type": "number",
+      "default": 0.15
+    },
+    "fixed_allocation": {
+      "type": "number",
+      "default": 0
+    },
+    "tolls_other": {
+      "type": "number",
+      "default": 0
+    },
+    "min_margin_pct": {
+      "type": "number",
+      "default": 20
+    },
+    "min_per_mile": {
+      "type": "number",
+      "default": 0
+    },
+    "avg_speed": {
+      "type": "number",
+      "default": 50
+    },
+    "expected_payment_days": {
+      "type": "number",
+      "default": 30
+    },
+    "free_detention_minutes": {
+      "type": "number",
+      "default": 120
+    },
+    "ratecon_upload_count": {
+      "type": "number",
+      "default": 0
+    },
+    "subscription_id": { "type": "string" },
+    "subscription_customer_id": { "type": "string" },
+    "subscription_variant_id": { "type": "string" },
+    "subscription_status": { "type": "string" },
+    "subscription_renews_at": { "type": "string" },
+    "subscription_ends_at": { "type": "string" },
+    "subscription_updated_at": { "type": "string" },
+    "early_bird_claimed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

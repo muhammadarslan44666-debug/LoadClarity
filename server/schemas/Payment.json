@@ -1,0 +1,36 @@
+{
+  "name": "Payment",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "load_id": {
+      "type": "string"
+    },
+    "load_number": {
+      "type": "string"
+    },
+    "invoice_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "invoice_amount": {
+      "type": "number"
+    },
+    "paid_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "amount_received": {
+      "type": "number"
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_id",
+    "load_id"
+  ]
+}

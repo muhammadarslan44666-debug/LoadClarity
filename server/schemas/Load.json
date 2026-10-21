@@ -1,0 +1,218 @@
+{
+  "name": "Load",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "carrier_id": {
+      "type": "string"
+    },
+    "load_number": {
+      "type": "string"
+    },
+    "broker_id": {
+      "type": "string"
+    },
+    "broker_name": {
+      "type": "string"
+    },
+    "broker_reference": {
+      "type": "string"
+    },
+    "broker_mc": {
+      "type": "string"
+    },
+    "broker_phone": {
+      "type": "string"
+    },
+    "broker_email": {
+      "type": "string"
+    },
+    "pickup_company": {
+      "type": "string"
+    },
+    "pickup_address": {
+      "type": "string"
+    },
+    "pickup_city": {
+      "type": "string"
+    },
+    "pickup_state": {
+      "type": "string"
+    },
+    "pickup_zip": {
+      "type": "string"
+    },
+    "pickup_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "pickup_appointment": {
+      "type": "string"
+    },
+    "delivery_company": {
+      "type": "string"
+    },
+    "delivery_address": {
+      "type": "string"
+    },
+    "delivery_city": {
+      "type": "string"
+    },
+    "delivery_state": {
+      "type": "string"
+    },
+    "delivery_zip": {
+      "type": "string"
+    },
+    "delivery_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "delivery_appointment": {
+      "type": "string"
+    },
+    "commodity": {
+      "type": "string"
+    },
+    "weight_lb": {
+      "type": "number"
+    },
+    "equipment_type": {
+      "type": "string",
+      "enum": [
+        "dry_van",
+        "reefer",
+        "flatbed",
+        "box_truck",
+        "other"
+      ],
+      "default": "dry_van"
+    },
+    "rate": {
+      "type": "number"
+    },
+    "loaded_miles": {
+      "type": "number"
+    },
+    "deadhead_miles": {
+      "type": "number"
+    },
+    "detention_terms": {
+      "type": "string"
+    },
+    "layover_terms": {
+      "type": "string"
+    },
+    "tonu_terms": {
+      "type": "string"
+    },
+    "lumper_terms": {
+      "type": "string"
+    },
+    "lumper_amount": {
+      "type": "number"
+    },
+    "other_accessorials": {
+      "type": "string"
+    },
+    "special_instructions": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "driver_id": {
+      "type": "string"
+    },
+    "truck_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_review",
+        "ready",
+        "booked",
+        "driver_assigned",
+        "at_pickup",
+        "loading",
+        "in_transit",
+        "at_delivery",
+        "delivered",
+        "pod_pending",
+        "billing_review",
+        "billing_ready",
+        "completed",
+        "cancelled"
+      ],
+      "default": "draft"
+    },
+    "exception_flag": {
+      "type": "boolean",
+      "default": false
+    },
+    "fee_mode": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "flat"
+      ]
+    },
+    "fee_percent": {
+      "type": "number"
+    },
+    "fee_flat": {
+      "type": "number"
+    },
+    "fee_base": {
+      "type": "string",
+      "enum": [
+        "gross",
+        "net"
+      ]
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "take",
+        "counter",
+        "pass"
+      ]
+    },
+    "decision_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "counter_rate": {
+      "type": "number"
+    },
+    "counter_note": {
+      "type": "string"
+    },
+    "pass_reason": {
+      "type": "string"
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false
+    },
+    "pod_present": {
+      "type": "boolean",
+      "default": false
+    },
+    "bol_present": {
+      "type": "boolean",
+      "default": false
+    },
+    "ratecon_present": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "company_id"
+  ]
+}

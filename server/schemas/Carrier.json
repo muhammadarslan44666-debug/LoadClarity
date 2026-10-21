@@ -1,0 +1,68 @@
+{
+  "name": "Carrier",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "mc_number": {
+      "type": "string"
+    },
+    "fee_mode": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "flat"
+      ],
+      "default": "percent"
+    },
+    "fee_percent": {
+      "type": "number",
+      "default": 5
+    },
+    "fee_flat": {
+      "type": "number",
+      "default": 0
+    },
+    "fee_base": {
+      "type": "string",
+      "enum": [
+        "gross",
+        "net"
+      ],
+      "default": "gross"
+    },
+    "mpg": {
+      "type": "number"
+    },
+    "driver_pay_per_mile": {
+      "type": "number"
+    },
+    "driver_pay_percent": {
+      "type": "number"
+    },
+    "driver_pay_mode": {
+      "type": "string",
+      "enum": [
+        "per_mile",
+        "percent"
+      ]
+    },
+    "maintenance_per_mile": {
+      "type": "number"
+    },
+    "fixed_allocation": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_id",
+    "name"
+  ]
+}
