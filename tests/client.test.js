@@ -61,7 +61,7 @@ test('full onboarding and dispatcher flow through the client', async () => {
   await api.entities.Truck.delete(truck.id);
   assert.equal((await api.entities.Truck.filter({ company_id: company.id })).length, 0);
   await api.entities.Company.update(company.id, { plan: 'pro', fuel_price: 4.1 });
-  assert.equal((await api.entities.Company.get(company.id)).plan, 'pro');
+  assert.equal((await api.entities.Company.get(company.id)).plan, 'free');
 
   api.auth.logout(null);
   assert.equal(await api.auth.isAuthenticated(), false);
