@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { api } from '@/api/client';
+import { supabase } from "@/lib/supabase"; // Make sure this points to your supabase client file
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,7 +22,14 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      await api.auth.login(email, password);
+      // Direct authentication call via Supabase
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) throw authError;
+
       window.location.href = returnTo;
     } catch (err) {
       setError(err.message || "Invalid email or password");
@@ -30,7 +37,6 @@ export default function Login() {
       setLoading(false);
     }
   };
-
 
   return (
     <AuthLayout

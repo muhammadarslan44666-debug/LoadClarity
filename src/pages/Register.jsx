@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { UserPlus, Mail, Lock, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
-import { api } from "@/api/client";
+import { supabase } from "@/lib/supabase"; // Updated to use Supabase client directly
 import { safeReturnTo } from "@/lib/authReturnTo";
 
 export default function Register() {
@@ -25,10 +25,21 @@ export default function Register() {
       return;
     }
 
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
     setLoading(true);
     try {
-      if (password.length < 8) throw new Error("Password must be at least 8 characters");
-      await api.auth.register(email, password);
+      // Direct registration call via Supabase
+      const { data, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (authError) throw authError;
+
       window.location.href = returnTo;
     } catch (err) {
       setError(err.message || "Registration failed");
@@ -36,7 +47,6 @@ export default function Register() {
       setLoading(false);
     }
   };
-
 
   return (
     <AuthLayout
