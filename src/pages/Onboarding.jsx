@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api } from '@/api/client';
+import { supabase } from '@/lib/supabaseClient'; // सुनिश्चित करें कि आपका Supabase क्लाइंट यहाँ से इम्पोर्ट हो रहा है
 import { useAuth } from '@/lib/AuthContext';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,22 +25,33 @@ export default function Onboarding() {
   const submit = async (e) => {
     e.preventDefault();
     if (!f.name.trim()) { toast({ title: 'Company name is required', variant: 'destructive' }); return; }
+    if (!user) { toast({ title: 'User not authenticated', variant: 'destructive' }); return; }
+    
     setSaving(true);
     try {
-      const company = await api.entities.Company.create({
-        name: f.name, fuel_price: Number(f.fuel_price), mpg: Number(f.mpg),
-        driver_pay_per_mile: Number(f.driver_pay_per_mile), maintenance_per_mile: Number(f.maintenance_per_mile),
-        fixed_allocation: Number(f.fixed_allocation), min_margin_pct: Number(f.min_margin_pct),
-        avg_speed: Number(f.avg_speed), expected_payment_days: Number(f.expected_payment_days),
-        free_detention_minutes: Number(f.free_detention_minutes),
-      });
-      await api.auth.updateMe({ company_id: company.id });
-      if (f.carrier_name.trim()) {
-        await api.entities.Carrier.create({
-          company_id: company.id, name: f.carrier_name,
-          fee_mode: 'percent', fee_percent: Number(f.carrier_fee_percent), fee_base: 'gross',
-        });
-      }
+      // सीधे Supabase की 'workspaces' टेबल में डेटा डालें
+      const { data, error } = await supabase
+        .from('workspaces')
+        .insert([
+          {
+            user_id: user.id,
+            name: f.name,
+            fuel_price: Number(f.fuel_price),
+            mpg: Number(f.mpg),
+            driver_pay_per_mile: Number(f.driver_pay_per_mile),
+            maintenance_per_mile: Number(f.maintenance_per_mile),
+            fixed_allocation: Number(f.fixed_allocation),
+            min_margin_pct: Number(f.min_margin_pct),
+            avg_speed: Number(f.avg_speed),
+            expected_payment_days: Number(f.expected_payment_days),
+            free_detention_minutes: Number(f.free_detention_minutes),
+          }
+        ])
+        .select()
+        .single();
+
+      if (error) throw error;
+
       await checkUserAuth();
       navigate('/');
     } catch (err) {
