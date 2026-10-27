@@ -29,7 +29,7 @@ export default function Onboarding() {
     
     setSaving(true);
     try {
-      // सीधे Supabase की 'workspaces' टेबल में डेटा डालें
+      // Insert workspace data into Supabase
       const { data, error } = await supabase
         .from('workspaces')
         .insert([
@@ -52,8 +52,16 @@ export default function Onboarding() {
 
       if (error) throw error;
 
-      await checkUserAuth();
-      navigate('/');
+      // Update auth state in background
+      if (checkUserAuth) {
+        checkUserAuth().catch(console.error);
+      }
+
+      // Show success toast
+      toast({ title: 'Workspace created successfully!' });
+
+      // Direct redirection to ensure navigation happens smoothly
+      window.location.href = '/dashboard';
     } catch (err) {
       toast({ title: err.message || 'Onboarding failed', variant: 'destructive' });
     } finally {
