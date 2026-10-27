@@ -1,0 +1,50 @@
+{
+  "name": "Truck",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "unit_number": {
+      "type": "string"
+    },
+    "vin": {
+      "type": "string"
+    },
+    "equipment_type": {
+      "type": "string",
+      "enum": [
+        "dry_van",
+        "reefer",
+        "flatbed",
+        "box_truck",
+        "other"
+      ],
+      "default": "dry_van"
+    },
+    "mpg": {
+      "type": "number"
+    },
+    "driver_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "dispatched",
+        "in_transit",
+        "out_of_service",
+        "maintenance"
+      ],
+      "default": "available"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_id",
+    "unit_number"
+  ]
+}

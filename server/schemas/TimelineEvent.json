@@ -1,0 +1,36 @@
+{
+  "name": "TimelineEvent",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "load_id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "dispatcher",
+        "driver",
+        "system",
+        "ai"
+      ],
+      "default": "system"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "attachment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_id",
+    "load_id",
+    "type"
+  ]
+}

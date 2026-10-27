@@ -1,0 +1,60 @@
+{
+  "name": "DetentionEvent",
+  "type": "object",
+  "properties": {
+    "company_id": {
+      "type": "string"
+    },
+    "load_id": {
+      "type": "string"
+    },
+    "appointment_time": {
+      "type": "string"
+    },
+    "arrival_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "check_in_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "loading_start_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "departure_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "free_minutes": {
+      "type": "number",
+      "default": 120
+    },
+    "detention_rate": {
+      "type": "number"
+    },
+    "terms": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "no_detention",
+        "potential",
+        "confirmed",
+        "evidence_collected",
+        "submitted",
+        "resolved"
+      ],
+      "default": "no_detention"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_id",
+    "load_id"
+  ]
+}
