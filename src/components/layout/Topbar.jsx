@@ -15,6 +15,9 @@ export default function Topbar({ carriers }) {
   const { logout } = useAuth();
   const [q, setQ] = useState('');
 
+  // Safe Array Check: Ensure carriers is strictly an array
+  const carrierList = Array.isArray(carriers) ? carriers : [];
+
   const submitSearch = (e) => {
     e.preventDefault();
     if (q.trim()) navigate(`/search?q=${encodeURIComponent(q.trim())}`);
@@ -59,8 +62,8 @@ export default function Topbar({ carriers }) {
           aria-label="Carrier filter"
         >
           <option value="all">All carriers</option>
-          {(carriers || []).map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
+          {carrierList.map((c) => (
+            <option key={c.id || c.name} value={c.id}>{c.name}</option>
           ))}
         </select>
         <Button variant="ghost" size="icon" onClick={() => logout()} title="Log out">
