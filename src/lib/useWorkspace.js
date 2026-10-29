@@ -28,8 +28,9 @@ export function useWorkspace() {
         setCompany(workspaces[0]);
         try {
           const cs = await api.entities.Carrier.filter({ company_id: workspaces[0].id }, '-created_date', 100);
-          // पक्का करें कि carriers हमेशा एक ऐरे ही हो
-          setCarriers(Array.isArray(cs) ? cs : (cs?.data || []));
+          // पक्का करें कि cs एक ऐरे है
+          const validCarriers = Array.isArray(cs) ? cs : (cs?.data || []);
+          setCarriers(validCarriers);
         } catch (err) {
           setCarriers([]);
         }
