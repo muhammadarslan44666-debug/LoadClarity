@@ -28,16 +28,19 @@ export function useWorkspace() {
         setCompany(workspaces[0]);
         try {
           const cs = await api.entities.Carrier.filter({ company_id: workspaces[0].id }, '-created_date', 100);
-          setCarriers(cs || []);
+          // पक्का करें कि carriers हमेशा एक ऐरे ही हो
+          setCarriers(Array.isArray(cs) ? cs : (cs?.data || []));
         } catch (err) {
           setCarriers([]);
         }
       } else {
         setCompany(null);
+        setCarriers([]);
       }
     } catch (e) {
       console.error('workspace load failed', e);
       setCompany(null);
+      setCarriers([]);
     } finally {
       setLoading(false);
     }
@@ -49,7 +52,7 @@ export function useWorkspace() {
 
   return {
     company,
-    carriers,
+    carriers: Array.isArray(carriers) ? carriers : [],
     settings: company || {},
     loading,
     refresh: load,
