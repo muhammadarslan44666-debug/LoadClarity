@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
-import { userCompanyId } from '@/lib/useWorkspace';
 import { CarrierProvider } from './CarrierContext';
 import Topbar from './Topbar';
 import Sidebar from './Sidebar';
@@ -10,16 +9,20 @@ import { useWorkspace } from '@/lib/useWorkspace';
 
 export default function AppShell() {
   const { user } = useAuth();
-  const companyId = userCompanyId(user);
   const { company, carriers, loading } = useWorkspace();
 
-  if (!companyId) return <Onboarding />;
+  // Jab tak workspace load ho raha hai, loader dikhao
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-muted border-t-primary rounded-full animate-spin" />
       </div>
     );
+  }
+
+  // Agar database mein company/workspace nahi mili, tab hi Onboarding dikhao
+  if (!company) {
+    return <Onboarding />;
   }
 
   return (
