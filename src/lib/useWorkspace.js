@@ -1,37 +1,58 @@
 import { useEffect, useState, useCallback } from 'react';
 import { api } from '@/api/client';
 import { useAuth } from '@/lib/AuthContext';
+import { supabase } from '@/lib/supabase';
 
 export const userCompanyId = (user) => user?.company_id || user?.data?.company_id || null;
 
 export function useWorkspace() {
   const { user } = useAuth();
-  const companyId = userCompanyId(user);
   const [company, setCompany] = useState(null);
   const [carriers, setCarriers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
-    if (!companyId) { setLoading(false); return; }
+    if (!user?.id) { 
+      setLoading(false); 
+      return; 
+    }
+    
     setLoading(true);
     try {
-      let comp = null;
-      try { comp = await api.entities.Company.get(companyId); } catch (_) {}
-      if (!comp) {
-        const list = await api.entities.Company.filter({ created_by_id: user.id });
-        comp = list[0] || null;
-      }
+      // Direct Supabase query to check the 'workspaces' table for the logged-in user
+      const { data: workspaces, error } = await supabase
+        .from('workspaces')
+        .select('*')
+        .eq('user_id', user.id)
+        .limit(1);
+
+      if (error) throw error;
+
+      const comp = workspaces && workspaces.length > 0 ? workspaces[0] : null;
       setCompany(comp);
-      const cs = await api.entities.Carrier.filter({ company_id: companyId }, '-created_date', 100);
-      setCarriers(cs || []);
+
+      if (comp) {
+        // Fetch carriers if workspace exists
+        const cs = await api.entities.Carrier.filter({ company_id: comp.id }, '-created_date', 100).catch(() => []);
+        setCarriers(cs || []);
+      }
     } catch (e) {
       console.error('workspace load failed', e);
     } finally {
       setLoading(false);
     }
-  }, [companyId, user]);
+  }, [user]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { 
+    load(); 
+  }, [load]);
 
-  return { company, carriers, settings: company || {}, loading, refresh: load, companyId };
+  return { 
+    company, 
+    carriers, 
+    settings: company || {}, 
+    loading, 
+    refresh: load, 
+    companyId: company?.id || null 
+  };
 }
