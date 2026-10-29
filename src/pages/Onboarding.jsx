@@ -61,7 +61,7 @@ export default function Onboarding() {
       toast({ title: 'Workspace created successfully!' });
 
       // Direct redirection to ensure navigation happens smoothly
-      window.location.href = '/';
+      window.location.href = '/loads';
     } catch (err) {
       toast({ title: err.message || 'Onboarding failed', variant: 'destructive' });
     } finally {
